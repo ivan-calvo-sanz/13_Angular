@@ -11,6 +11,7 @@ export class EmpleadoComponent {
   nombre = 'Juan';
   apellido = 'Diaz';
   edad = 20;
+  empresa = 'Google';
   habilitaCuadro = false;
   habilitaChech = false;
   textoRegistro = 'No hay nadie registrado';
