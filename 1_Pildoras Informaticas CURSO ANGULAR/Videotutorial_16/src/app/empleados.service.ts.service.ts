@@ -28,4 +28,20 @@ export class EmpleadosServiceTsService {
     );
     this.empleados.push(empleado);
   }
+
+  encontrarEmpleado(indice: number): Empleado {
+    let empleado: Empleado = this.empleados[indice];
+    return empleado;
+  }
+
+  actualizarEmpleado(indice: number, miEmpleado: Empleado) {
+    this.empleados[indice].nombre = miEmpleado.nombre;
+    this.empleados[indice].apellido = miEmpleado.apellido;
+    this.empleados[indice].cargo = miEmpleado.cargo;
+    this.empleados[indice].salario = miEmpleado.salario;
+  }
+
+  borrarEmpleado(indice: number) {
+    this.empleados.splice(indice, 1);
+  }
 }
