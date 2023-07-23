@@ -14,6 +14,7 @@ export class ActualizaComponentComponent {
   cuadroApellido: string = '';
   cuadroCargo: string = '';
   cuadroSalario: number = 0;
+  accion: number;
 
   empleados: Empleado[] = [];
   indice: number;
@@ -36,9 +37,10 @@ export class ActualizaComponentComponent {
     this.cuadroApellido = empleado.apellido;
     this.cuadroCargo = empleado.cargo;
     this.cuadroSalario = empleado.salario;
+    this.accion = parseInt(this.route.snapshot.queryParams['accion']);
   }
 
-  actualizaEmpleado() {
+  /*   actualizaEmpleado() {
     let miEmpleado = new Empleado(
       this.cuadroNombre,
       this.cuadroApellido,
@@ -53,9 +55,28 @@ export class ActualizaComponentComponent {
   eliminarEmpleado() {
     this.empleadosService.borrarEmpleado(this.indice);
     this.router.navigate(['']);
-  }
+  } */
 
   volverHome() {
     this.router.navigate(['']);
+  }
+
+  actualizaEmpleado() {
+    //Si "accion=1" actualiza Empleado
+    if (this.accion == 1) {
+      let miEmpleado = new Empleado(
+        this.cuadroNombre,
+        this.cuadroApellido,
+        this.cuadroCargo,
+        this.cuadroSalario
+      );
+      //this.miServicio.muestraMensaje('Nombre del empleado: ' + miEmpleado.nombre);
+      this.empleadosService.actualizarEmpleado(this.indice, miEmpleado);
+      this.router.navigate(['']);
+      //Si "accion=2" elimina Empleado
+    } else {
+      this.empleadosService.borrarEmpleado(this.indice);
+      this.router.navigate(['']);
+    }
   }
 }

@@ -24,7 +24,17 @@ export class HomeComponentComponent implements OnInit {
     //this.empleados = this.empleadosService.empleados;
   }
   ngOnInit(): void {
-    this.empleados = this.empleadosService.empleados;
+    //this.empleados = this.empleadosService.empleados;
+    console.log(this.empleadosService.obtenerEmpleados());
+    //para ver los datos que devuelve el Observable hay que subcribirse a el
+    //en la variable q se le indica "misEmpleados" seva guardando los datos
+    this.empleadosService.obtenerEmpleados().subscribe((misEmpleados) => {
+      console.log(misEmpleados);
+      //guardo los valores que vienen del Observable "misEmpleados"
+      this.empleados = Object.values(misEmpleados);
+      //envio estos valores a guardar al Servicio EmpleadosServiceTsService
+      this.empleadosService.setEmpleados(this.empleados);
+    });
   }
 
   agregarEmpleado() {

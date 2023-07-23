@@ -13,6 +13,12 @@ import { QuienesComponentComponent } from './quienes-component/quienes-component
 import { ContactoComponentComponent } from './contacto-component/contacto-component.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ActualizaComponentComponent } from './actualiza-component/actualiza-component.component';
+import { ErrorPersonalizadoComponent } from './error-personalizado/error-personalizado.component';
+import { DataServices } from './data.services';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
+import { CookieService } from 'ngx-cookie-service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -20,6 +26,8 @@ const appRoutes: Routes = [
   { path: 'quienes', component: QuienesComponentComponent },
   { path: 'contacto', component: ContactoComponentComponent },
   { path: 'actualiza/:id', component: ActualizaComponentComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: ErrorPersonalizadoComponent },
 ];
 
 @NgModule({
@@ -32,9 +40,22 @@ const appRoutes: Routes = [
     QuienesComponentComponent,
     ContactoComponentComponent,
     ActualizaComponentComponent,
+    LoginComponent,
+    ErrorPersonalizadoComponent,
   ],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
-  providers: [ServicioEmpleadosService, EmpleadosServiceTsService],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+  ],
+  providers: [
+    ServicioEmpleadosService,
+    EmpleadosServiceTsService,
+    DataServices,
+    LoginService,
+    CookieService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
